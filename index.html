@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#ffd9ec" />
+<title>⚗️ Lab Detektif Elektrolit — Kimia Kelas X</title>
+
+<!-- ═══════════ FONTS ═══════════ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════════════════════
+   SECTION 1 — VARIABEL & RESET
+   ══════════════════════════════════════════════════════════ */
+:root{
+  --pink:#ff9ecd;
+  --pink-d:#f472b6;
+  --cyan:#7fe3f0;
+  --cyan-d:#22b8cf;
+  --lime:#c3f77a;
+  --lime-d:#84cc16;
+  --purple:#c4a6ff;
+  --purple-d:#a855f7;
+  --yellow:#ffe066;
+  --yellow-d:#fbbf24;
+  --orange:#ffb877;
+  --ink:#3a2d55;
+  --ink-soft:#6b5b8a;
+  --card:#ffffff;
+  --radius:22px;
+  --shadow:0 8px 22px rgba(168,85,247,.14);
+  --shadow-soft:0 4px 14px rgba(34,184,207,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  font-family:'Nunito',system-ui,-apple-system,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 12% 8%, #ffe9f6 0%, transparent 42%),
+    radial-gradient(circle at 88% 4%, #e4f8ff 0%, transparent 40%),
+    radial-gradient(circle at 50% 100%, #f2ffe0 0%, transparent 55%),
+    linear-gradient(160deg,#fff8fc 0%,#f2fbff 45%,#f7fff0 100%);
+  background-attachment:fixed;
+  display:flex;
+  justify-content:center;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,.font-head{font-family:'Baloo 2',cursive,sans-serif;letter-spacing:.2px;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input{font-family:inherit;}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION 2 — LAYOUT UTAMA (MOBILE VIEW max 520px)
+   ══════════════════════════════════════════════════════════ */
+#app{
+  position:relative;
+  width:100%;
+  max-width:520px;
+  min-height:100vh;
+  padding:0 0 34px;
+}
+.screen{display:none;animation:fadeUp .38s ease both;}
+.screen.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+
+.wrap{padding:16px 16px 0;}
+
+/* ── HEADER ── */
+.brand{
+  text-align:center;
+  padding:26px 16px 18px;
+}
+.brand .logo{
+  font-size:52px;line-height:1;display:inline-block;
+  filter:drop-shadow(0 6px 10px rgba(168,85,247,.3));
+  animation:floaty 3.2s ease-in-out infinite;
+}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-9px) rotate(3deg);}}
+.brand h1{
+  font-size:28px;font-weight:800;line-height:1.12;margin-top:8px;
+  background:linear-gradient(92deg,#f472b6 0%,#a855f7 42%,#22b8cf 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.brand .sub{
+  margin-top:7px;font-size:12.5px;font-weight:800;color:var(--ink-soft);
+  background:#fff;display:inline-block;padding:6px 14px;border-radius:999px;
+  box-shadow:var(--shadow-soft);border:1.5px dashed #d9c9ff;
+}
+
+/* ── KARTU UMUM ── */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:16px 15px;
+  margin-bottom:14px;
+  box-shadow:var(--shadow);
+  border:2.5px solid #eee;
+  position:relative;
+}
+.card.cyan{border-color:#a9ecf7;box-shadow:0 8px 22px rgba(34,184,207,.16);}
+.card.purple{border-color:#d9c6ff;box-shadow:0 8px 22px rgba(168,85,247,.16);}
+.card.pink{border-color:#ffc6e2;box-shadow:0 8px 22px rgba(244,114,182,.16);}
+.card.lime{border-color:#d6f7a4;box-shadow:0 8px 22px rgba(132,204,22,.16);}
+.card-title{
+  font-size:17px;font-weight:800;display:flex;align-items:center;gap:8px;margin-bottom:10px;
+}
+.card-title .em{font-size:20px;}
+
+/* ── TEORI TABS ── */
+.tabs{display:flex;gap:7px;margin-bottom:12px;}
+.tab{
+  flex:1;padding:9px 4px;border-radius:14px;font-weight:800;font-size:12.5px;
+  background:#f4f0ff;color:#8a7bb0;border:2px solid transparent;transition:.2s;
+}
+.tab.active{color:#fff;transform:translateY(-2px);}
+.tab[data-tab="kuat"].active{background:linear-gradient(135deg,#4ade80,#16a34a);box-shadow:0 6px 14px rgba(22,163,74,.32);}
+.tab[data-tab="lemah"].active{background:linear-gradient(135deg,#fcd34d,#f59e0b);box-shadow:0 6px 14px rgba(245,158,11,.32);}
+.tab[data-tab="non"].active{background:linear-gradient(135deg,#fb7185,#e11d48);box-shadow:0 6px 14px rgba(225,29,72,.32);}
+
+.tabpane{display:none;}
+.tabpane.active{display:block;animation:fadeUp .3s ease both;}
+
+.badge{
+  display:inline-block;padding:5px 13px;border-radius:999px;font-weight:900;
+  font-size:11.5px;color:#fff;margin-bottom:9px;letter-spacing:.4px;
+}
+.badge.kuat{background:linear-gradient(135deg,#4ade80,#16a34a);}
+.badge.lemah{background:linear-gradient(135deg,#fcd34d,#f59e0b);}
+.badge.non{background:linear-gradient(135deg,#fb7185,#e11d48);}
+
+.explain{
+  font-size:13px;line-height:1.62;color:#5b4b7d;background:#faf8ff;
+  border-radius:14px;padding:11px 13px;margin-bottom:11px;font-weight:600;
+  border-left:5px solid #d9c6ff;
+}
+.explain b{color:#7c3aed;}
+
+.chem-list{display:flex;flex-direction:column;gap:8px;}
+.chem-item{
+  display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:14px;
+  background:#fbfffd;border:2px solid #eef7f0;transition:.18s;
+}
+.chem-item:active{transform:scale(.98);}
+.chem-item .formula{
+  font-weight:900;font-size:13.5px;padding:5px 10px;border-radius:10px;min-width:82px;
+  text-align:center;letter-spacing:.2px;font-family:'Baloo 2',cursive;
+}
+.chem-item.kuat .formula{background:#dcfce7;color:#15803d;}
+.chem-item.lemah .formula{background:#fef3c7;color:#b45309;}
+.chem-item.non .formula{background:#ffe4e6;color:#be123c;}
+.chem-item .nm{font-size:12.2px;font-weight:800;line-height:1.3;color:#4a3d6b;}
+.chem-item .nm small{display:block;font-weight:600;font-size:10.8px;color:#8b7fa8;margin-top:1px;}
+
+.alpha-box{
+  margin-top:12px;background:linear-gradient(135deg,#fff7e6,#f3e8ff);
+  border-radius:14px;padding:10px 12px;text-align:center;border:2px dashed #e3d0ff;
+}
+.alpha-box .lbl{font-size:11px;font-weight:800;color:#8b7fa8;letter-spacing:.4px;}
+.alpha-box .frm{font-family:'Baloo 2',cursive;font-size:15px;font-weight:800;color:#7c3aed;margin-top:3px;}
+
+/* ── PETUNJUK ── */
+.steps{display:flex;flex-direction:column;gap:8px;}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:12.6px;line-height:1.5;font-weight:700;color:#5b4b7d;}
+.step .num{
+  flex:0 0 24px;height:24px;border-radius:9px;display:grid;place-items:center;
+  font-size:12px;font-weight:900;color:#fff;
+  background:linear-gradient(135deg,#f472b6,#a855f7);
+  box-shadow:0 4px 9px rgba(168,85,247,.28);
+}
+
+/* ── INPUT & AVATAR ── */
+.field-lbl{font-size:12.5px;font-weight:800;color:#6b5b8a;margin-bottom:6px;display:block;}
+#inpNama{
+  width:100%;padding:13px 15px;border-radius:15px;border:2.5px solid #d6f7a4;
+  background:#fbfff5;font-size:14.5px;font-weight:800;color:var(--ink);outline:none;transition:.2s;
+}
+#inpNama:focus{border-color:#84cc16;box-shadow:0 0 0 4px rgba(132,204,22,.16);}
+#inpNama::placeholder{color:#b6c9a0;font-weight:700;}
+
+.avatars{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px;}
+.avatar{
+  border-radius:18px;padding:11px 8px 12px;background:#fbfff5;
+  border:3px solid #e6f5d0;transition:.22s;display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.avatar svg{width:74px;height:88px;display:block;}
+.avatar .av-name{font-size:12px;font-weight:900;color:#5b7a3a;}
+.avatar.sel{
+  border-color:var(--pink-d);background:#fff5fa;
+  box-shadow:0 8px 20px rgba(244,114,182,.3);transform:translateY(-3px);
+}
+.avatar.sel .av-name{color:#be185d;}
+
+/* ── TOMBOL BESAR ── */
+.btn-big{
+  width:100%;padding:17px;border-radius:20px;font-size:16.5px;font-weight:900;
+  font-family:'Baloo 2',cursive;color:#fff;letter-spacing:.4px;
+  background:linear-gradient(120deg,#f472b6,#a855f7 55%,#22b8cf);
+  box-shadow:0 10px 24px rgba(168,85,247,.36);
+  transition:.18s;margin-top:4px;
+}
+.btn-big:active{transform:scale(.97);box-shadow:0 5px 14px rgba(168,85,247,.3);}
+.btn-big:disabled{opacity:.45;filter:grayscale(.5);box-shadow:none;}
+.btn-green{
+  background:linear-gradient(120deg,#4ade80,#16a34a);
+  box-shadow:0 10px 24px rgba(22,163,74,.34);
+}
+.btn-ghost{
+  background:#fff;color:#7c3aed;border:2.5px solid #ddd0ff;
+  box-shadow:0 6px 16px rgba(168,85,247,.14);
+}
+.hint-mini{font-size:11.5px;text-align:center;color:#a394c4;font-weight:700;margin-top:9px;}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION 3 — LAYAR LAB 3D
+   ══════════════════════════════════════════════════════════ */
+#screen-lab{
+  position:fixed;top:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:520px;height:100dvh;height:100vh;
+  display:none;overflow:hidden;background:#dff3ff;z-index:50;
+}
+#screen-lab.active{display:block;}
+#labCanvas{display:block;width:100%;height:100%;touch-action:none;}
+
+/* HUD */
+#hud{
+  position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:6px;
+  align-items:flex-end;pointer-events:none;z-index:12;
+}
+.hud-chip{
+  background:rgba(255,255,255,.94);border-radius:13px;padding:6px 11px;
+  font-size:11.5px;font-weight:900;color:#4a3d6b;
+  box-shadow:0 4px 12px rgba(80,60,140,.16);border:2px solid #efe6ff;
+  display:flex;align-items:center;gap:5px;backdrop-filter:blur(6px);
+}
+.hud-chip.poin{border-color:#ffe066;color:#b45309;}
+.hud-chip.prog{border-color:#a9ecf7;color:#0e7490;}
+#btnSound{
+  pointer-events:auto;width:38px;height:38px;border-radius:12px;
+  background:rgba(255,255,255,.94);box-shadow:0 4px 12px rgba(80,60,140,.16);
+  font-size:17px;display:grid;place-items:center;border:2px solid #efe6ff;
+}
+#hudNama{max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/* Joystick */
+#joystick{
+  position:absolute;left:14px;bottom:16px;width:118px;height:118px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.72),rgba(255,255,255,.34));
+  border:3px solid rgba(255,255,255,.9);
+  box-shadow:0 8px 22px rgba(80,60,140,.22);z-index:14;touch-action:none;
+}
+#joyKnob{
+  position:absolute;left:50%;top:50%;width:50px;height:50px;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:linear-gradient(135deg,#f472b6,#a855f7);
+  box-shadow:0 5px 14px rgba(168,85,247,.45),inset 0 -3px 6px rgba(0,0,0,.12);
+  transition:transform .05s linear;
+}
+
+/* Tombol Uji */
+#btnUji{
+  position:absolute;right:14px;bottom:34px;z-index:14;
+  padding:14px 17px;border-radius:18px;font-size:13.5px;font-weight:900;
+  font-family:'Baloo 2',cursive;color:#fff;letter-spacing:.3px;
+  background:linear-gradient(135deg,#22b8cf,#0891b2);
+  box-shadow:0 9px 22px rgba(8,145,178,.4);
+  display:none;max-width:58%;text-align:center;line-height:1.2;
+  animation:pop .3s ease both;
+}
+@keyframes pop{from{opacity:0;transform:scale(.8);}to{opacity:1;transform:scale(1);}}
+#btnUji.show{display:block;}
+#btnUji:active{transform:scale(.95);}
+#btnUji.busy{background:linear-gradient(135deg,#a5b4fc,#6366f1);pointer-events:none;}
+
+/* Toast petunjuk */
+#toast{
+  position:absolute;left:50%;top:70px;transform:translateX(-50%);
+  background:rgba(58,45,85,.9);color:#fff;font-size:12px;font-weight:800;
+  padding:9px 16px;border-radius:999px;z-index:20;opacity:0;transition:.3s;
+  pointer-events:none;white-space:nowrap;backdrop-filter:blur(4px);
+}
+#toast.show{opacity:1;}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION 4 — MODAL
+   ══════════════════════════════════════════════════════════ */
+#overlay{
+  position:fixed;inset:0;background:rgba(58,45,85,.55);backdrop-filter:blur(5px);
+  display:none;align-items:flex-end;justify-content:center;z-index:200;
+}
+#overlay.show{display:flex;animation:fadeIn .25s ease both;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.modal{
+  width:100%;max-width:520px;background:#fff;border-radius:26px 26px 0 0;
+  padding:20px 18px 26px;max-height:88vh;overflow-y:auto;
+  animation:slideUp .32s cubic-bezier(.22,1,.36,1) both;
+  box-shadow:0 -10px 34px rgba(80,60,140,.3);
+}
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:none;}}
+.modal .handle{
+  width:46px;height:5px;border-radius:99px;background:#e6dff5;margin:0 auto 14px;
+}
+.modal h3{font-size:19px;font-weight:800;margin-bottom:4px;text-align:center;}
+.modal .sub-t{font-size:12.5px;text-align:center;color:#8b7fa8;font-weight:700;margin-bottom:14px;}
+
+.obs-box{
+  border-radius:16px;padding:13px 14px;margin-bottom:14px;
+  background:linear-gradient(135deg,#f7fbff,#f4f0ff);border:2px dashed #cfd8ff;
+}
+.obs-row{
+  display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;color:#4a3d6b;
+  padding:5px 0;
+}
+.obs-row .ico{font-size:17px;}
+
+.q-text{font-size:14px;font-weight:900;color:#3a2d55;margin-bottom:11px;text-align:center;}
+.ans-col{display:flex;flex-direction:column;gap:9px;}
+.ans-btn{
+  padding:14px 15px;border-radius:15px;font-size:13.5px;font-weight:900;
+  background:#f7f4ff;border:2.5px solid #e2d8ff;color:#5b4b7d;transition:.16s;text-align:left;
+}
+.ans-btn:active{transform:scale(.98);}
+.ans-btn.correct{background:#dcfce7;border-color:#4ade80;color:#15803d;}
+.ans-btn.wrong{background:#ffe4e6;border-color:#fb7185;color:#be123c;opacity:.7;}
+.ans-btn:disabled{pointer-events:none;}
+
+.feedback{
+  margin-top:13px;border-radius:15px;padding:12px 14px;font-size:12.8px;font-weight:800;
+  line-height:1.55;display:none;animation:fadeUp .3s ease both;
+}
+.feedback.show{display:block;}
+.feedback.ok{background:#dcfce7;color:#15803d;border:2px solid #86efac;}
+.feedback.no{background:#ffe4e6;color:#be123c;border:2px solid #fda4af;}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION 5 — KUIS
+   ══════════════════════════════════════════════════════════ */
+.progress-wrap{
+  height:13px;background:#efeaff;border-radius:99px;overflow:hidden;margin-bottom:14px;
+  border:2px solid #e2d8ff;
+}
+.progress-bar{
+  height:100%;width:0%;border-radius:99px;transition:width .4s cubic-bezier(.22,1,.36,1);
+  background:linear-gradient(90deg,#f472b6,#a855f7,#22b8cf);
+}
+.quiz-head{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;
+}
+.quiz-head .qn{font-size:12px;font-weight:900;color:#a394c4;letter-spacing:.4px;}
+.quiz-head .qp{font-size:12.5px;font-weight:900;color:#b45309;}
+
+.q-card{
+  background:linear-gradient(135deg,#fff9fe,#f6f9ff);
+  border-radius:18px;padding:15px;margin-bottom:13px;border:2.5px solid #ffd9ec;
+}
+.q-card .qtag{
+  display:inline-block;font-size:10.5px;font-weight:900;color:#fff;letter-spacing:.5px;
+  background:linear-gradient(135deg,#f472b6,#a855f7);padding:4px 11px;border-radius:99px;margin-bottom:9px;
+}
+.q-card .qbody{font-size:14px;font-weight:800;line-height:1.55;color:#3a2d55;}
+
+.opt-btn{
+  width:100%;text-align:left;padding:13px 14px;border-radius:15px;margin-bottom:9px;
+  background:#fff;border:2.5px solid #e6ddf8;font-size:13px;font-weight:800;color:#4a3d6b;
+  line-height:1.45;transition:.16s;display:flex;gap:10px;align-items:flex-start;
+}
+.opt-btn .letter{
+  flex:0 0 24px;height:24px;border-radius:8px;display:grid;place-items:center;
+  background:#f0e9ff;color:#7c3aed;font-weight:900;font-size:12px;
+}
+.opt-btn:active{transform:scale(.985);}
+.opt-btn.correct{background:#dcfce7;border-color:#4ade80;color:#15803d;}
+.opt-btn.correct .letter{background:#4ade80;color:#fff;}
+.opt-btn.wrong{background:#ffe4e6;border-color:#fb7185;color:#be123c;}
+.opt-btn.wrong .letter{background:#fb7185;color:#fff;}
+.opt-btn:disabled{pointer-events:none;}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION 6 — SERTIFIKAT
+   ══════════════════════════════════════════════════════════ */
+#certificate{
+  background:#fff;border-radius:22px;padding:22px 18px 20px;
+  border:6px solid transparent;
+  background-image:linear-gradient(#fff,#fff),
+    linear-gradient(135deg,#ffd166,#ff9ecd,#c4a6ff,#7fe3f0,#c3f77a);
+  background-origin:border-box;background-clip:padding-box,border-box;
+  box-shadow:0 14px 34px rgba(168,85,247,.2);
+  text-align:center;position:relative;overflow:hidden;
+}
+#certificate::before{
+  content:"";position:absolute;inset:9px;border:2px dashed #f0d9ff;border-radius:14px;pointer-events:none;
+}
+.cert-seal{font-size:46px;line-height:1;margin-bottom:4px;}
+.cert-school{
+  font-size:11px;font-weight:900;letter-spacing:1.6px;color:#8b7fa8;
+}
+.cert-title{
+  font-family:'Baloo 2',cursive;font-size:34px;font-weight:800;line-height:1.1;margin:4px 0 2px;
+  background:linear-gradient(92deg,#d946ef,#a855f7,#22b8cf);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.cert-sub{
+  font-size:10.5px;font-weight:900;letter-spacing:1.1px;color:#b06fd6;margin-bottom:13px;
+}
+.cert-give{font-size:12px;font-weight:700;color:#8b7fa8;margin-bottom:8px;}
+.cert-name{
+  display:inline-block;font-family:'Baloo 2',cursive;font-size:22px;font-weight:800;color:#3a2d55;
+  padding:7px 22px;border-bottom:3px dashed #ff9ecd;margin-bottom:12px;max-width:100%;
+  word-break:break-word;
+}
+.cert-desc{font-size:11.8px;line-height:1.62;color:#6b5b8a;font-weight:700;margin-bottom:15px;padding:0 4px;}
+.cert-score{display:flex;gap:11px;justify-content:center;margin-bottom:16px;}
+.cert-score > div{
+  flex:1;max-width:130px;background:linear-gradient(135deg,#f7fbff,#fdf4ff);
+  border-radius:16px;padding:11px 6px;border:2.5px solid #e6ddf8;
+}
+.cert-score span{
+  display:block;font-size:9.5px;font-weight:900;letter-spacing:1.3px;color:#a394c4;margin-bottom:3px;
+}
+.cert-score strong{
+  font-family:'Baloo 2',cursive;font-size:30px;font-weight:800;line-height:1;
+}
+.cert-score .score-val{
+  background:linear-gradient(92deg,#0891b2,#22b8cf);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.cert-score .score-grade{
+  background:linear-gradient(92deg,#db2777,#f472b6);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.cert-foot{border-top:2px dashed #f0d9ff;padding-top:12px;margin-bottom:8px;}
+.cert-teacher{font-size:12.5px;font-weight:900;color:#3a2d55;}
+.cert-date{font-size:11px;font-weight:700;color:#8b7fa8;margin-top:3px;}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION 7 — LAIN-LAIN
+   ══════════════════════════════════════════════════════════ */
+.loading-dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;
+  animation:blink 1s infinite;
+}
+@keyframes blink{0%,100%{opacity:.3;}50%{opacity:1;}}
+.spin{display:inline-block;animation:sp 1s linear infinite;}
+@keyframes sp{to{transform:rotate(360deg);}}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:#ddd0ff;border-radius:9px;}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ════════════════════════════════════════════════════════
+       LAYAR 1 — HALAMAN AWAL
+       ════════════════════════════════════════════════════════ -->
+  <section id="screen-home" class="screen active">
+
+    <!-- BRAND -->
+    <div class="brand">
+      <div class="logo">⚗️</div>
+      <h1>LAB DETEKTIF ELEKTROLIT</h1>
+      <div class="sub">Petualangan Virtual ala Roblox · Kimia Kelas X</div>
+    </div>
+
+    <div class="wrap">
+
+      <!-- TUJUAN -->
+      <div class="card cyan">
+        <div class="card-title"><span class="em">🎯</span> Tujuan Pembelajaran</div>
+        <div style="font-size:13px;line-height:1.68;color:#5b4b7d;font-weight:700;">
+          Murid mampu <b style="color:#0891b2;">mengklasifikasikan</b> dan
+          <b style="color:#0891b2;">membedakan</b> larutan elektrolit dan non-elektrolit
+          berdasarkan <b style="color:#0891b2;">daya hantar listriknya</b> melalui
+          percobaan virtual.
+        </div>
+      </div>
+
+      <!-- TEORI -->
+      <div class="card purple">
+        <div class="card-title"><span class="em">📚</span> Teori Dasar &amp; Contoh Larutan</div>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="kuat">⚡ Kuat</button>
+          <button class="tab" data-tab="lemah">💧 Lemah</button>
+          <button class="tab" data-tab="non">🚫 Non</button>
+        </div>
+
+        <!-- TAB KUAT -->
+        <div class="tabpane active" id="pane-kuat">
+          <div class="badge kuat">ELEKTROLIT KUAT · α = 1</div>
+          <div class="explain">
+            Zat <b>terionisasi sempurna</b> dalam air. Seluruh molekul terurai menjadi ion-ion
+            bebas, sehingga larutan menghantarkan listrik dengan sangat baik.
+            <br>💡 <b>Lampu menyala TERANG</b> · <b>Banyak gelembung gas</b>
+          </div>
+          <div class="chem-list">
+            <div class="chem-item kuat"><div class="formula">HCl</div><div class="nm">Asam Klorida<small>Asam lambung, pembersih kerak</small></div></div>
+            <div class="chem-item kuat"><div class="formula">NaOH</div><div class="nm">Natrium Hidroksida<small>Soda api, pembuat sabun</small></div></div>
+            <div class="chem-item kuat"><div class="formula">NaCl</div><div class="nm">Garam Dapur<small>Bumbu masak sehari-hari</small></div></div>
+            <div class="chem-item kuat"><div class="formula">H₂SO₄</div><div class="nm">Asam Sulfat<small>Elektrolit aki kendaraan</small></div></div>
+            <div class="chem-item kuat"><div class="formula">KOH</div><div class="nm">Kalium Hidroksida<small>Baterai alkaline</small></div></div>
+          </div>
+        </div>
+
+        <!-- TAB LEMAH -->
+        <div class="tabpane" id="pane-lemah">
+          <div class="badge lemah">ELEKTROLIT LEMAH · 0 &lt; α &lt; 1</div>
+          <div class="explain">
+            Zat hanya <b>terionisasi sebagian</b> dalam air. Sebagian besar masih berupa molekul
+            netral, hanya sedikit ion yang terbentuk sehingga daya hantarnya lemah.
+            <br>💡 <b>Lampu menyala REDUP</b> · <b>Sedikit gelembung gas</b>
+          </div>
+          <div class="chem-list">
+            <div class="chem-item lemah"><div class="formula">CH₃COOH</div><div class="nm">Asam Cuka<small>Bumbu dapur, pengawet makanan</small></div></div>
+            <div class="chem-item lemah"><div class="formula">NH₃</div><div class="nm">Amonia<small>Pembersih kaca, pupuk</small></div></div>
+            <div class="chem-item lemah"><div class="formula">H₂CO₃</div><div class="nm">Asam Karbonat<small>Minuman bersoda</small></div></div>
+            <div class="chem-item lemah"><div class="formula">Al(OH)₃</div><div class="nm">Aluminium Hidroksida<small>Obat maag</small></div></div>
+            <div class="chem-item lemah"><div class="formula">C₆H₈O₇</div><div class="nm">Asam Sitrat<small>Air jeruk nipis, lemon</small></div></div>
+          </div>
+        </div>
+
+        <!-- TAB NON -->
+        <div class="tabpane" id="pane-non">
+          <div class="badge non">NON-ELEKTROLIT · α = 0</div>
+          <div class="explain">
+            Zat <b>tidak terionisasi</b> dalam air. Tetap berupa <b>molekul netral</b> dan
+            tidak menghasilkan ion, sehingga larutan tidak dapat menghantarkan listrik.
+            <br>💡 <b>Lampu TIDAK menyala</b> · <b>Tidak ada gelembung</b>
+          </div>
+          <div class="chem-list">
+            <div class="chem-item non"><div class="formula">C₆H₁₂O₆</div><div class="nm">Glukosa<small>Gula darah, sumber energi</small></div></div>
+            <div class="chem-item non"><div class="formula">CO(NH₂)₂</div><div class="nm">Urea<small>Pupuk tanaman, sisa metabolisme</small></div></div>
+            <div class="chem-item non"><div class="formula">C₂H₅OH</div><div class="nm">Etanol<small>Alkohol, antiseptik</small></div></div>
+            <div class="chem-item non"><div class="formula">C₁₂H₂₂O₁₁</div><div class="nm">Sukrosa<small>Gula pasir</small></div></div>
+            <div class="chem-item non"><div class="formula">C₃H₈O₃</div><div class="nm">Gliserol<small>Pelembab, bahan kosmetik</small></div></div>
+          </div>
+        </div>
+
+        <div class="alpha-box">
+          <div class="lbl">RUMUS DERAJAT IONISASI</div>
+          <div class="frm">α = mol terionisasi / mol mula-mula</div>
+        </div>
+      </div>
+
+      <!-- PETUNJUK -->
+      <div class="card pink">
+        <div class="card-title"><span class="em">📖</span> Petunjuk Bermain</div>
+        <div class="steps">
+          <div class="step"><div class="num">1</div><div>Isi <b>nama detektif</b> dan pilih avatar jas lab favoritmu.</div></div>
+          <div class="step"><div class="num">2</div><div>Tekan <b>MULAI PENJELAJAHAN</b> untuk masuk ke laboratorium 3D.</div></div>
+          <div class="step"><div class="num">3</div><div>Gerakkan detektif dengan <b>joystick</b> (kiri bawah), <b>tap gelas</b>, atau tombol <b>WASD / panah</b>.</div></div>
+          <div class="step"><div class="num">4</div><div>Dekati gelas kimia sampai tombol <b>🔬 Uji</b> muncul, lalu tekan.</div></div>
+          <div class="step"><div class="num">5</div><div>Amati <b>nyala lampu</b> dan <b>gelembung gas</b>, lalu jawab klasifikasinya.</div></div>
+          <div class="step"><div class="num">6</div><div>Jawaban <b>benar +10 poin</b>, salah <b>−5 poin</b> (boleh ulang sampai benar).</div></div>
+          <div class="step"><div class="num">7</div><div>Selesaikan <b>10 gelas</b> + <b>6 soal kritis</b> untuk meraih sertifikat! 🏅</div></div>
+        </div>
+      </div>
+
+      <!-- DATA DETEKTIF -->
+      <div class="card lime">
+        <div class="card-title"><span class="em">👤</span> Data Detektif</div>
+
+        <label class="field-lbl" for="inpNama">Nama Lengkap Detektif</label>
+        <input id="inpNama" type="text" placeholder="Contoh: Maria Angelica" maxlength="28" autocomplete="off" />
+
+        <div class="field-lbl" style="margin-top:14px;">Pilih Avatar</div>
+        <div class="avatars">
+          <button class="avatar sel" data-avatar="putri">
+            <svg viewBox="0 0 100 120">
+              <path d="M17 46 Q17 10 50 10 Q83 10 83 46 L83 100 Q73 92 71 72 L71 46 L29 46 L29 72 Q27 92 17 100 Z" fill="#5b3a29"/>
+              <rect x="43" y="54" width="14" height="13" rx="4" fill="#f6c9a8"/>
+              <path d="M22 118 L22 76 Q22 65 34 62 L50 62 L66 62 Q78 65 78 76 L78 118 Z" fill="#ffffff" stroke="#e4e0f5" stroke-width="1.6"/>
+              <path d="M38 62 L50 84 L62 62 Z" fill="#ff9ecd"/>
+              <circle cx="50" cy="41" r="20" fill="#fbd7b8"/>
+              <path d="M30 42 Q30 17 50 17 Q70 17 70 42 Q66 29 50 29 Q34 29 30 42 Z" fill="#5b3a29"/>
+              <circle cx="43" cy="42" r="2.7" fill="#3a2d55"/>
+              <circle cx="57" cy="42" r="2.7" fill="#3a2d55"/>
+              <path d="M44 50 Q50 55 56 50" stroke="#b5654a" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div class="av-name">Detektif Putri</div>
+          </button>
+          <button class="avatar" data-avatar="putra">
+            <svg viewBox="0 0 100 120">
+              <rect x="43" y="54" width="14" height="13" rx="4" fill="#f0bb96"/>
+              <path d="M22 118 L22 76 Q22 65 34 62 L50 62 L66 62 Q78 65 78 76 L78 118 Z" fill="#ffffff" stroke="#e4e0f5" stroke-width="1.6"/>
+              <path d="M38 62 L50 84 L62 62 Z" fill="#ff9ecd"/>
+              <circle cx="50" cy="41" r="20" fill="#f5c9a3"/>
+              <path d="M30 41 Q30 15 50 15 Q70 15 70 41 Q68 27 50 27 Q32 27 30 41 Z" fill="#2f2438"/>
+              <circle cx="43" cy="42" r="2.7" fill="#3a2d55"/>
+              <circle cx="57" cy="42" r="2.7" fill="#3a2d55"/>
+              <path d="M44 50 Q50 55 56 50" stroke="#a85c3e" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div class="av-name">Detektif Putra</div>
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-big" id="btnStart">🚀 MULAI PENJELAJAHAN</button>
+      <div class="hint-mini">Pastikan nama sudah diisi minimal 2 karakter ✨</div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       LAYAR 2 — LABORATORIUM VIRTUAL 3D
+       ════════════════════════════════════════════════════════ -->
+  <section id="screen-lab" class="screen">
+    <canvas id="labCanvas"></canvas>
+
+    <div id="hud">
+      <div class="hud-chip" id="hudNama">👤 Detektif</div>
+      <div class="hud-chip poin" id="hudPoin">⭐ 0</div>
+      <div class="hud-chip prog" id="hudProg">🧪 0/10</div>
+      <button id="btnSound" title="Suara">🔊</button>
+    </div>
+
+    <div id="toast"></div>
+
+    <button id="btnUji">🔬 Uji</button>
+
+    <div id="joystick"><div id="joyKnob"></div></div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       LAYAR 3 — SOAL BERPIKIR KRITIS
+       ════════════════════════════════════════════════════════ -->
+  <section id="screen-quiz" class="screen">
+    <div class="brand" style="padding:22px 16px 10px;">
+      <div class="logo">🧠</div>
+      <h1 style="font-size:23px;">TANTANGAN BERPIKIR KRITIS</h1>
+      <div class="sub">6 Soal Literasi Sains · Elektrolit</div>
+    </div>
+    <div class="wrap">
+      <div class="progress-wrap"><div class="progress-bar" id="quizBar"></div></div>
+      <div class="quiz-head">
+        <div class="qn" id="quizNum">SOAL 1 DARI 6</div>
+        <div class="qp" id="quizPoin">⭐ 0</div>
+      </div>
+      <div id="quizArea"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       LAYAR 4 — SERTIFIKAT
+       ════════════════════════════════════════════════════════ -->
+  <section id="screen-cert" class="screen">
+    <div class="brand" style="padding:24px 16px 12px;">
+      <div class="logo">🎉</div>
+      <h1 style="font-size:24px;">SELAMAT, DETEKTIF!</h1>
+      <div class="sub">Misi elektrolit berhasil diselesaikan</div>
+    </div>
+    <div class="wrap">
+
+      <div id="certificate">
+        <div class="cert-seal">🏅</div>
+        <div class="cert-school">SMA SANTO PAULUS PONTIANAK</div>
+        <div class="cert-title">SERTIFIKAT</div>
+        <div class="cert-sub">PENGHARGAAN PENYELESAIAN GAMIFIKASI KIMIA</div>
+        <div class="cert-give">Diberikan dengan bangga kepada</div>
+        <div class="cert-name" id="certNama">Nama Siswa</div>
+        <div class="cert-desc">
+          Atas keberhasilan menyelesaikan seluruh misi Laboratorium Virtual
+          <b>Detektif Elektrolit</b> — mampu mengklasifikasikan dan membedakan
+          larutan elektrolit kuat, elektrolit lemah, serta non-elektrolit
+          berdasarkan daya hantar listriknya dengan sangat baik.
+        </div>
+        <div class="cert-score">
+          <div><span>NILAI</span><strong class="score-val" id="certNilai">0</strong></div>
+          <div><span>PREDIKAT</span><strong class="score-grade" id="certGrade">C</strong></div>
+        </div>
+        <div class="cert-foot">
+          <div class="cert-teacher">GURU KIMIA — Agustinus Ridwan, S.Pd.</div>
+          <div class="cert-date" id="certTanggal">Pontianak, 1 Januari 2025</div>
+        </div>
+      </div>
+
+      <button class="btn-big btn-green" id="btnPdf" style="margin-top:16px;">⬇️ UNDUH SERTIFIKAT PDF</button>
+      <button class="btn-big btn-ghost" id="btnReset" style="margin-top:11px;">🔄 MAIN LAGI DARI AWAL</button>
+      <div class="hint-mini">Data tersimpan otomatis di perangkatmu 💾</div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     OVERLAY MODAL
+     ══════════════════════════════════════════════════════════ -->
+<div id="overlay">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     LIBRARY CDN
+     ══════════════════════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   SECTION A — SISTEM SUARA (WEB AUDIO API)
+   ══════════════════════════════════════════════════════════════ */
+const Sound = {
+  ctx:null, enabled:true, bgTimer:null, bgStep:0,
+
+  init(){
+    if(!this.ctx){
+      try{
+        const AC = window.AudioContext || window.webkitAudioContext;
+        this.ctx = new AC();
+      }catch(e){ this.ctx = null; }
+    }
+    if(this.ctx && this.ctx.state === 'suspended'){ this.ctx.resume(); }
+  },
+
+  tone(freq, dur=0.15, type='sine', vol=0.1, delay=0){
+    if(!this.enabled) return;
+    this.init();
+    if(!this.ctx) return;
+    const t0 = this.ctx.currentTime + delay;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.linearRampToValueAtTime(vol, t0 + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+    osc.start(t0);
+    osc.stop(t0 + dur + 0.03);
+  },
+
+  click(){ this.tone(720, 0.08, 'triangle', 0.09); },
+  select(){ this.tone(880, 0.1, 'triangle', 0.09, 0); this.tone(1174, 0.12, 'triangle', 0.08, 0.09); },
+
+  start(){
+    [523, 659, 784, 1047].forEach((f,i)=> this.tone(f, 0.22, 'sine', 0.11, i*0.11));
+  },
+
+  correct(){
+    [523, 659, 784].forEach((f,i)=> this.tone(f, 0.2, 'sine', 0.12, i*0.09));
+  },
+
+  wrong(){
+    this.tone(220, 0.22, 'sawtooth', 0.09, 0);
+    this.tone(165, 0.3, 'sawtooth', 0.09, 0.14);
+  },
+
+  test(){
+    for(let i=0;i<12;i++){
+      const f = 520 + Math.random()*760;
+      this.tone(f, 0.06, 'square', 0.045, i*0.06);
+    }
+  },
+
+  fanfare(){
+    const notes = [523, 659, 784, 1047, 784, 1047];
+    notes.forEach((f,i)=> this.tone(f, 0.3, 'sine', 0.12, i*0.17));
+    this.tone(1319, 1.1, 'sine', 0.13, 1.05);
+    this.tone(1047, 1.1, 'triangle', 0.08, 1.05);
+  },
+
+  startBg(){
+    this.stopBg();
+    if(!this.enabled) return;
+    this.init();
+    if(!this.ctx) return;
+    const seq = [523, 659, 784, 659, 587, 698, 880, 698];
+    this.bgStep = 0;
+    this.bgTimer = setInterval(()=>{
+      if(!this.enabled) return;
+      const f = seq[this.bgStep % seq.length];
+      this.tone(f, 0.42, 'sine', 0.028, 0);
+      if(this.bgStep % 2 === 0) this.tone(f/2, 0.6, 'triangle', 0.018, 0);
+      this.bgStep++;
+    }, 780);
+  },
+
+  stopBg(){
+    if(this.bgTimer){ clearInterval(this.bgTimer); this.bgTimer = null; }
+  },
+
+  toggle(){
+    this.enabled = !this.enabled;
+    if(this.enabled){ this.init(); this.startBg(); }
+    else { this.stopBg(); }
+    return this.enabled;
+  }
+};
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION B — STATE & PENYIMPANAN DATA
+   ══════════════════════════════════════════════════════════════ */
+const STORAGE_KEY = 'labDetektifElektrolit_v5';
+
+const state = {
+  nama: '',
+  avatar: 'putri',
+  poinPraktikum: 0,
+  poinKritis: 0,
+  totalPoin: 0,
+  nilai: 0,
+  grade: 'C',
+  detailPraktikum: [],
+  detailKritis: [],
+  mulai: null,
+  selesai: null,
+  updated: null
+};
+
+function saveState(){
+  state.totalPoin = state.poinPraktikum + state.poinKritis;
+  state.updated = new Date().toISOString();
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state, null, 2));
+  }catch(e){ console.warn('Gagal menyimpan state:', e); }
+}
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const obj = JSON.parse(raw);
+    if(obj && typeof obj === 'object'){
+      Object.keys(state).forEach(k=>{ if(obj[k] !== undefined) state[k] = obj[k]; });
+    }
+  }catch(e){ console.warn('Gagal memuat state:', e); }
+}
+
+function resetState(){
+  state.nama = '';
+  state.avatar = 'putri';
+  state.poinPraktikum = 0;
+  state.poinKritis = 0;
+  state.totalPoin = 0;
+  state.nilai = 0;
+  state.grade = 'C';
+  state.detailPraktikum = [];
+  state.detailKritis = [];
+  state.mulai = null;
+  state.selesai = null;
+  state.updated = null;
+  saveState();
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION C — DATA LARUTAN & SOAL
+   ══════════════════════════════════════════════════════════════ */
+const BEAKERS = [
+  { nama:'Asam Klorida',       rumus:'HCl',      tipe:'kuat',  warna:0xbfe8ff },
+  { nama:'Natrium Hidroksida', rumus:'NaOH',     tipe:'kuat',  warna:0xd8cffc },
+  { nama:'Garam Dapur',        rumus:'NaCl',     tipe:'kuat',  warna:0xe6f2ff },
+  { nama:'Asam Cuka',          rumus:'CH₃COOH',  tipe:'lemah', warna:0xfff0bf },
+  { nama:'Amonia',             rumus:'NH₃',      tipe:'lemah', warna:0xd4f0ff },
+  { nama:'Asam Karbonat',      rumus:'H₂CO₃',    tipe:'lemah', warna:0xd9f7e5 },
+  { nama:'Glukosa',            rumus:'C₆H₁₂O₆',  tipe:'non',   warna:0xfff8d9 },
+  { nama:'Urea',               rumus:'CO(NH₂)₂', tipe:'non',   warna:0xfffdf0 },
+  { nama:'Etanol',             rumus:'C₂H₅OH',   tipe:'non',   warna:0xeeffe4 },
+  { nama:'Air Jeruk Nipis',    rumus:'C₆H₈O₇',   tipe:'lemah', warna:0xe9ffc2 }
+];
+
+const TIPE_LABEL = {
+  kuat:  'Elektrolit Kuat',
+  lemah: 'Elektrolit Lemah',
+  non:   'Non-Elektrolit'
+};
+
+const OBSERVASI = {
+  kuat:  { lampu:'Lampu menyala TERANG',  gelembung:'Banyak gelembung gas',      icoLampu:'💡', icoGelembung:'🫧' },
+  lemah: { lampu:'Lampu menyala REDUP',   gelembung:'Sedikit gelembung gas',     icoLampu:'🔅', icoGelembung:'🫧' },
+  non:   { lampu:'Lampu TIDAK menyala',   gelembung:'Tidak ada gelembung',       icoLampu:'⚫', icoGelembung:'🚫' }
+};
+
+const QUIZ = [
+  {
+    q: 'Mengapa larutan HCl dapat menyalakan lampu lebih terang dibandingkan CH₃COOH pada konsentrasi yang sama?',
+    opsi: [
+      'HCl terionisasi sempurna (banyak ion), CH₃COOH terionisasi sebagian (sedikit ion)',
+      'HCl memiliki molekul yang lebih besar sehingga mudah menghantarkan listrik',
+      'CH₃COOH tidak larut dalam air sehingga tidak ada ion yang terbentuk',
+      'HCl tidak mengandung ion, tetapi mengandung elektron bebas yang banyak'
+    ],
+    benar: 0,
+    bahas: 'Daya hantar listrik ditentukan oleh jumlah ion. HCl memiliki α = 1 (terionisasi sempurna) sehingga ionnya sangat banyak, sedangkan CH₃COOH memiliki α kecil (terionisasi sebagian) sehingga ionnya sedikit.'
+  },
+  {
+    q: 'Hasil uji daya hantar listrik: air garam menghasilkan gelembung sangat banyak, sedangkan air kelapa menghasilkan sedikit gelembung. Kesimpulan yang paling tepat adalah…',
+    opsi: [
+      'Air garam elektrolit kuat, air kelapa elektrolit lemah',
+      'Air garam non-elektrolit, air kelapa elektrolit kuat',
+      'Keduanya elektrolit kuat karena sama-sama berasal dari alam',
+      'Air kelapa elektrolit kuat karena kandungan airnya sangat banyak'
+    ],
+    benar: 0,
+    bahas: 'Gelembung gas menandakan adanya ion yang bergerak. Gelembung sangat banyak = ion sangat banyak = elektrolit kuat. Gelembung sedikit = ion sedikit = elektrolit lemah.'
+  },
+  {
+    q: 'Dua gelas berisi larutan bening tak berwarna. Gelas A berisi larutan gula, gelas B berisi larutan garam. Cara paling tepat untuk membedakan keduanya adalah…',
+    opsi: [
+      'Uji dengan alat uji elektrolit: garam menyalakan lampu, gula tidak',
+      'Melihat warna larutan: larutan gula berwarna putih, garam bening',
+      'Membaui larutan: larutan gula memiliki bau manis yang khas',
+      'Memanaskan larutan sampai mendidih lalu mengamati uapnya'
+    ],
+    benar: 0,
+    bahas: 'Sifat elektrolit hanya dapat dibuktikan melalui uji daya hantar listrik. Garam (NaCl) adalah elektrolit kuat sehingga lampu menyala; gula (sukrosa) adalah non-elektrolit sehingga lampu tidak menyala.'
+  },
+  {
+    q: 'Larutan glukosa (C₆H₁₂O₆) tidak dapat menghantarkan listrik. Alasan yang paling tepat adalah…',
+    opsi: [
+      'Glukosa dalam air tidak terurai menjadi ion (tetap molekul netral)',
+      'Glukosa tidak dapat larut dalam air sama sekali',
+      'Glukosa mengandung banyak elektron bebas di dalamnya',
+      'Glukosa menguap dengan cepat saat dilarutkan dalam air'
+    ],
+    benar: 0,
+    bahas: 'Arus listrik dihantarkan oleh ion-ion bebas. Glukosa larut dalam air tetapi tetap berupa molekul netral (tidak terionisasi), sehingga tidak ada ion yang menghantarkan listrik.'
+  },
+  {
+    q: 'Air urea tidak menyalakan lampu, sedangkan air sumur menyalakan lampu redup. Pernyataan yang benar adalah…',
+    opsi: [
+      'Air urea non-elektrolit, air sumur elektrolit lemah',
+      'Air urea elektrolit lemah, air sumur elektrolit kuat',
+      'Keduanya bersifat non-elektrolit karena tidak berwarna',
+      'Air sumur non-elektrolit karena mengandung banyak mineral'
+    ],
+    benar: 0,
+    bahas: 'Urea CO(NH₂)₂ tidak terionisasi dalam air sehingga bersifat non-elektrolit. Air sumur mengandung mineral terlarut yang terionisasi sebagian sehingga bersifat elektrolit lemah.'
+  },
+  {
+    q: 'Dari seluruh percobaan yang telah dilakukan, kesimpulan yang tepat mengenai hubungan jumlah ion dengan daya hantar listrik adalah…',
+    opsi: [
+      'Semakin banyak ion, semakin baik daya hantar listriknya',
+      'Semakin sedikit ion, semakin baik daya hantar listriknya',
+      'Jumlah ion tidak berpengaruh sama sekali terhadap daya hantar listrik',
+      'Daya hantar listrik hanya dipengaruhi oleh warna larutan'
+    ],
+    benar: 0,
+    bahas: 'Daya hantar listrik berbanding lurus dengan jumlah ion bebas dalam larutan. Semakin banyak ion → semakin baik daya hantar → lampu semakin terang dan gelembung semakin banyak.'
+  }
+];
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION D — NAVIGASI LAYAR
+   ══════════════════════════════════════════════════════════════ */
+let currentScreen = 'home';
+
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=> s.classList.remove('active'));
+  const el = document.getElementById('screen-' + name);
+  if(el) el.classList.add('active');
+  currentScreen = name;
+  window.scrollTo({ top:0, behavior:'instant' in window ? 'instant' : 'auto' });
+
+  if(name === 'lab'){
+    setTimeout(()=>{ resizeLab(); }, 60);
+  }
+  if(name === 'cert'){
+    buildCertificate();
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION E — LAYAR AWAL: TAB TEORI & AVATAR
+   ══════════════════════════════════════════════════════════════ */
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    Sound.click();
+    const key = tab.dataset.tab;
+    document.querySelectorAll('.tab').forEach(t=> t.classList.remove('active'));
+    document.querySelectorAll('.tabpane').forEach(p=> p.classList.remove('active'));
+    tab.classList.add('active');
+    const pane = document.getElementById('pane-' + key);
+    if(pane) pane.classList.add('active');
+  });
+});
+
+document.querySelectorAll('.avatar').forEach(av=>{
+  av.addEventListener('click', ()=>{
+    Sound.select();
+    document.querySelectorAll('.avatar').forEach(a=> a.classList.remove('sel'));
+    av.classList.add('sel');
+    state.avatar = av.dataset.avatar;
+  });
+});
+
+const inpNama = document.getElementById('inpNama');
+inpNama.addEventListener('input', ()=>{ state.nama = inpNama.value.trim(); });
+
+document.getElementById('btnStart').addEventListener('click', ()=>{
+  Sound.init();
+  const nama = inpNama.value.trim();
+  if(nama.length < 2){
+    Sound.wrong();
+    inpNama.style.borderColor = '#fb7185';
+    inpNama.focus();
+    setTimeout(()=>{ inpNama.style.borderColor = '#d6f7a4'; }, 1200);
+    showToastHome('Nama minimal 2 karakter ya, Detektif! ✍️');
+    return;
+  }
+  state.nama = nama;
+  state.poinPraktikum = 0;
+  state.poinKritis = 0;
+  state.detailPraktikum = [];
+  state.detailKritis = [];
+  state.mulai = new Date().toISOString();
+  state.selesai = null;
+  saveState();
+
+  Sound.start();
+  updateHUD();
+  showScreen('lab');
+  startLab();
+  Sound.startBg();
+  showToast('Gunakan joystick untuk menjelajah 🕹️');
+});
+
+function showToastHome(msg){
+  // Fallback sederhana: gunakan alert-free visual di layar awal
+  const el = document.createElement('div');
+  el.textContent = msg;
+  el.style.cssText = 'position:fixed;left:50%;bottom:34px;transform:translateX(-50%);background:rgba(58,45,85,.92);color:#fff;font-size:12.5px;font-weight:800;padding:11px 18px;border-radius:999px;z-index:999;box-shadow:0 8px 20px rgba(0,0,0,.25);';
+  document.body.appendChild(el);
+  setTimeout(()=>{ el.style.transition='.4s'; el.style.opacity='0'; }, 1500);
+  setTimeout(()=> el.remove(), 2000);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION F — LABORATORIUM VIRTUAL 3D (THREE.JS)
+   ══════════════════════════════════════════════════════════════ */
+const ROOM_HALF = 18;   // setengah lebar ruangan
+const ROOM = 14;        // tinggi dinding
+const BEAKER_R = 10;    // radius lingkaran gelas kimia
+const DETECT_R = 3.6;   // radius deteksi gelas
+const PLAYER_SPEED = 8.5;
+
+let scene, camera, renderer, clock;
+let player, playerMixerParts = {};
+let beakerObjects = [];
+let hitboxes = [];
+let labReady = false;
+let labLocked = false;
+let walkTarget = null;
+
+const joystickInput = { x:0, y:0, active:false };
+const keysPressed = {};
+
+let nearBeaker = null;
+let testingBeaker = null;
+let testTimer = 0;
+let testDuration = 2.6;
+
+/* ---------- TEKSTUR ---------- */
+function makeFloorTexture(){
+  const c = document.createElement('canvas');
+  c.width = 256; c.height = 256;
+  const x = c.getContext('2d');
+  const size = 64;
+  for(let i=0;i<4;i++){
+    for(let j=0;j<4;j++){
+      x.fillStyle = ((i+j)%2===0) ? '#cfeaff' : '#fff6cf';
+      x.fillRect(i*size, j*size, size, size);
+      x.strokeStyle = '#ffffff';
+      x.lineWidth = 4;
+      x.strokeRect(i*size, j*size, size, size);
+    }
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(10, 10);
+  return tex;
+}
+
+function makeWallTexture(baseColor, accentColor){
+  const c = document.createElement('canvas');
+  c.width = 256; c.height = 256;
+  const x = c.getContext('2d');
+  x.fillStyle = baseColor;
+  x.fillRect(0,0,256,256);
+  // ubin dinding halus
+  x.strokeStyle = 'rgba(255,255,255,.55)';
+  x.lineWidth = 2;
+  for(let i=0;i<=8;i++){
+    x.beginPath(); x.moveTo(i*32, 0); x.lineTo(i*32, 256); x.stroke();
+    x.beginPath(); x.moveTo(0, i*32); x.lineTo(256, i*32); x.stroke();
+  }
+  // pita aksen
+  x.fillStyle = accentColor;
+  x.fillRect(0, 150, 256, 26);
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(3, 1.6);
+  return tex;
+}
+
+function makeTextTexture(text, opts){
+  const o = Object.assign({
+    bg:'#ffffff', color:'#3a2d55', border:'#a855f7', fontSize:64,
+    w:512, h:256, bold:true, radius:36, sub:'', subColor:'#8b7fa8', subSize:34
+  }, opts || {});
+  const c = document.createElement('canvas');
+  c.width = o.w; c.height = o.h;
+  const x = c.getContext('2d');
+  // background
+  const r = o.radius;
+  x.fillStyle = o.bg;
+  x.beginPath();
+  x.moveTo(r,0); x.lineTo(o.w-r,0); x.quadraticCurveTo(o.w,0,o.w,r);
+  x.lineTo(o.w,o.h-r); x.quadraticCurveTo(o.w,o.h,o.w-r,o.h);
+  x.lineTo(r,o.h); x.quadraticCurveTo(0,o.h,0,o.h-r);
+  x.lineTo(0,r); x.quadraticCurveTo(0,0,r,0); x.closePath(); x.fill();
+  // border
+  x.strokeStyle = o.border; x.lineWidth = 12; x.stroke();
+  // text
+  x.fillStyle = o.color;
+  x.font = (o.bold ? '800 ' : '600 ') + o.fontSize + 'px "Baloo 2", sans-serif';
+  x.textAlign = 'center';
+  x.textBaseline = 'middle';
+  const cy = o.sub ? o.h/2 - 26 : o.h/2;
+  x.fillText(text, o.w/2, cy);
+  if(o.sub){
+    x.fillStyle = o.subColor;
+    x.font = '700 ' + o.subSize + 'px Nunito, sans-serif';
+    x.fillText(o.sub, o.w/2, o.h/2 + 40);
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.anisotropy = 4;
+  return tex;
+}
+
+/* ---------- SCENE SETUP ---------- */
+function initLabScene(){
+  const canvas = document.getElementById('labCanvas');
+  const w = canvas.clientWidth || 400;
+  const h = canvas.clientHeight || 700;
+
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xdff3ff);
+  scene.fog = new THREE.Fog(0xdff3ff, 46, 110);
+
+  camera = new THREE.PerspectiveCamera(58, w/h, 0.1, 220);
+  camera.position.set(0, 9, 12);
+  camera.lookAt(0, 1.2, 0);
+
+  renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(w, h, false);
+
+  clock = new THREE.Clock();
+
+  // Lighting
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xd6e9ff, 0.95));
+  const dir = new THREE.DirectionalLight(0xffffff, 0.55);
+  dir.position.set(12, 26, 10);
+  scene.add(dir);
+  const fill = new THREE.DirectionalLight(0xfff0d6, 0.3);
+  fill.position.set(-10, 14, -12);
+  scene.add(fill);
+
+  buildRoom();
+  buildPlayer();
+  buildBeakers();
+
+  labReady = true;
+}
+
+/* ---------- RUANGAN LAB ---------- */
+function buildRoom(){
+  const floorGeo = new THREE.PlaneGeometry(ROOM_HALF*2, ROOM_HALF*2);
+  const floorMat = new THREE.MeshLambertMaterial({ map: makeFloorTexture() });
+  const floor = new THREE.Mesh(floorGeo, floorMat);
+  floor.rotation.x = -Math.PI/2;
+  scene.add(floor);
+
+  // Ceiling
+  const ceil = new THREE.Mesh(
+    new THREE.PlaneGeometry(ROOM_HALF*2, ROOM_HALF*2),
+    new THREE.MeshLambertMaterial({ color:0xf3fbff })
+  );
+  ceil.rotation.x = Math.PI/2;
+  ceil.position.y = ROOM;
+  scene.add(ceil);
+
+  // Walls
+  const wallDefs = [
+    { pos:[0, ROOM/2, -ROOM_HALF], rot:[0, 0, 0],                  base:'#fdfbff', accent:'#ffb877' }, // Utara (oranye)
+    { pos:[0, ROOM/2,  ROOM_HALF], rot:[0, Math.PI, 0],            base:'#fffdf7', accent:'#ff9ecd' }, // Selatan (pink)
+    { pos:[-ROOM_HALF, ROOM/2, 0], rot:[0, Math.PI/2, 0],          base:'#fbfaff', accent:'#c4a6ff' }, // Barat (ungu)
+    { pos:[ ROOM_HALF, ROOM/2, 0], rot:[0, -Math.PI/2, 0],         base:'#f9feff', accent:'#7fe3f0' }  // Timur (cyan)
+  ];
+
+  wallDefs.forEach(def=>{
+    const mat = new THREE.MeshLambertMaterial({
+      map: makeWallTexture(def.base, def.accent),
+      side: THREE.DoubleSide
+    });
+    const wall = new THREE.Mesh(new THREE.PlaneGeometry(ROOM_HALF*2, ROOM), mat);
+    wall.position.set(def.pos[0], def.pos[1], def.pos[2]);
+    wall.rotation.set(def.rot[0], def.rot[1], def.rot[2]);
+    scene.add(wall);
+  });
+
+  // Pita warna aksen atas (garis tebal dekat plafon)
+  const stripColors = [0xffb877, 0xff9ecd, 0xc4a6ff, 0x7fe3f0];
+  const stripDefs = [
+    { pos:[0, ROOM-0.7, -ROOM_HALF+0.08], size:[ROOM_HALF*2, 0.55, 0.12], rot:[0,0,0] },
+    { pos:[0, ROOM-0.7,  ROOM_HALF-0.08], size:[ROOM_HALF*2, 0.55, 0.12], rot:[0,0,0] },
+    { pos:[-ROOM_HALF+0.08, ROOM-0.7, 0], size:[0.12, 0.55, ROOM_HALF*2], rot:[0,0,0] },
+    { pos:[ ROOM_HALF-0.08, ROOM-0.7, 0], size:[0.12, 0.55, ROOM_HALF*2], rot:[0,0,0] }
+  ];
+  stripDefs.forEach((d,i)=>{
+    const m = new THREE.Mesh(
+      new THREE.BoxGeometry(d.size[0], d.size[1], d.size[2]),
+      new THREE.MeshLambertMaterial({ color: stripColors[i], emissive: stripColors[i], emissiveIntensity:0.18 })
+    );
+    m.position.set(d.pos[0], d.pos[1], d.pos[2]);
+    scene.add(m);
+  });
+
+  // Poster Tabel Periodik (dinding utara, kiri atas)
+  const posterTex = makeTextTexture('TABEL PERIODIK', {
+    bg:'#e8f4ff', color:'#0e7490', border:'#38bdf8', fontSize:44, w:640, h:400,
+    sub:'UNSUR KIMIA', subColor:'#0891b2', subSize:36
+  });
+  const poster = new THREE.Mesh(
+    new THREE.PlaneGeometry(7, 4.4),
+    new THREE.MeshLambertMaterial({ map: posterTex })
+  );
+  poster.position.set(-9.5, 6.6, -ROOM_HALF + 0.12);
+  scene.add(poster);
+
+  // Rambu K3
+  const signData = [
+    { txt:'APD WAJIB',   bg:'#dcfce7', col:'#15803d', bd:'#4ade80', x:-3.4 },
+    { txt:'NO FOOD',     bg:'#ffe4e6', col:'#be123c', bd:'#fb7185', x:-0.4 },
+    { txt:'CUCI TANGAN', bg:'#e0f2fe', col:'#0369a1', bd:'#38bdf8', x: 2.6 }
+  ];
+  signData.forEach(s=>{
+    const tex = makeTextTexture(s.txt, {
+      bg:s.bg, color:s.col, border:s.bd, fontSize:46, w:420, h:220, sub:'', radius:30
+    });
+    const mesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.5, 1.32),
+      new THREE.MeshLambertMaterial({ map: tex })
+    );
+    mesh.position.set(s.x, 8.6, -ROOM_HALF + 0.12);
+    scene.add(mesh);
+  });
+
+  // Fume Hood (lemari asam) biru — kanan dinding utara
+  const fume = new THREE.Group();
+  const fumeBody = new THREE.Mesh(
+    new THREE.BoxGeometry(5.4, 7.2, 3.2),
+    new THREE.MeshLambertMaterial({ color:0x7dd3fc })
+  );
+  fumeBody.position.set(0, 3.6, 0);
+  fume.add(fumeBody);
+
+  const fumeGlass = new THREE.Mesh(
+    new THREE.BoxGeometry(4.6, 3.0, 0.16),
+    new THREE.MeshLambertMaterial({ color:0xbae6fd, transparent:true, opacity:0.55 })
+  );
+  fumeGlass.position.set(0, 4.6, 1.66);
+  fume.add(fumeGlass);
+
+  const fumeTrim = new THREE.Mesh(
+    new THREE.BoxGeometry(5.6, 0.42, 3.4),
+    new THREE.MeshLambertMaterial({ color:0x0284c7 })
+  );
+  fumeTrim.position.set(0, 7.35, 0);
+  fume.add(fumeTrim);
+
+  const fumeBase = new THREE.Mesh(
+    new THREE.BoxGeometry(5.6, 0.5, 3.4),
+    new THREE.MeshLambertMaterial({ color:0x0ea5e9 })
+  );
+  fumeBase.position.set(0, 0.25, 0);
+  fume.add(fumeBase);
+
+  fume.position.set(11.5, 0, -ROOM_HALF + 1.8);
+  scene.add(fume);
+
+  // Rak dinding dengan botol kimia (dinding barat)
+  buildShelf(-ROOM_HALF + 0.7, 0, 1);
+
+  // Lemari bawah dengan knob emas (dinding selatan)
+  buildCabinet();
+
+  // Lampu langit-langit panel kuning 3x3
+  for(let i=-1;i<=1;i++){
+    for(let j=-1;j<=1;j++){
+      const panel = new THREE.Mesh(
+        new THREE.BoxGeometry(4.2, 0.24, 2.2),
+        new THREE.MeshLambertMaterial({ color:0xfff2a8, emissive:0xffe066, emissiveIntensity:0.75 })
+      );
+      panel.position.set(i*9.5, ROOM - 0.2, j*9.5);
+      scene.add(panel);
+
+      const pl = new THREE.PointLight(0xffe9a8, 0.35, 24);
+      pl.position.set(i*9.5, ROOM - 1.4, j*9.5);
+      scene.add(pl);
+    }
+  }
+
+  // Ring penanda di lantai tengah
+  const ring = new THREE.Mesh(
+    new THREE.RingGeometry(3.4, 3.85, 64),
+    new THREE.MeshBasicMaterial({ color:0xa855f7, transparent:true, opacity:0.42, side:THREE.DoubleSide })
+  );
+  ring.rotation.x = -Math.PI/2;
+  ring.position.y = 0.02;
+  scene.add(ring);
+
+  const ring2 = new THREE.Mesh(
+    new THREE.RingGeometry(1.6, 1.95, 48),
+    new THREE.MeshBasicMaterial({ color:0xf472b6, transparent:true, opacity:0.34, side:THREE.DoubleSide })
+  );
+  ring2.rotation.x = -Math.PI/2;
+  ring2.position.y = 0.02;
+  scene.add(ring2);
+}
+
+function buildShelf(x, z, side){
+  const group = new THREE.Group();
+  const shelfMat = new THREE.MeshLambertMaterial({ color:0xffd9a8 });
+  const bottleColors = [0x7fe3f0,0xff9ecd,0xc3f77a,0xc4a6ff,0xffe066,0xffb877];
+
+  for(let level=0; level<3; level++){
+    const y = 2.2 + level*1.9;
+    // papan
+    const board = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.16, 14), shelfMat);
+    board.position.set(0, y, 0);
+    group.add(board);
+
+    for(let b=0; b<6; b++){
+      const zz = -5.6 + b*2.24;
+      const h = 0.9 + Math.random()*0.5;
+      const bottle = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.26, 0.3, h, 12),
+        new THREE.MeshLambertMaterial({
+          color: bottleColors[(level*6+b) % bottleColors.length],
+          transparent:true, opacity:0.85
+        })
+      );
+      bottle.position.set(0.02, y + 0.08 + h/2, zz);
+      group.add(bottle);
+
+      const cap = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.12, 0.12, 0.16, 10),
+        new THREE.MeshLambertMaterial({ color:0x8b7fa8 })
+      );
+      cap.position.set(0.02, y + 0.08 + h + 0.08, zz);
+      group.add(cap);
+    }
+  }
+
+  group.position.set(x, 0, z);
+  scene.add(group);
+}
+
+function buildCabinet(){
+  const g = new THREE.Group();
+  const bodyMat = new THREE.MeshLambertMaterial({ color:0xe6f2ff });
+  const body = new THREE.Mesh(new THREE.BoxGeometry(16, 3.4, 1.4), bodyMat);
+  body.position.set(0, 1.7, 0);
+  g.add(body);
+
+  // pintu-pintu
+  for(let i=-2;i<=2;i++){
+    const door = new THREE.Mesh(
+      new THREE.BoxGeometry(2.8, 2.9, 0.14),
+      new THREE.MeshLambertMaterial({ color:0xd8ecff })
+    );
+    door.position.set(i*3.1, 1.7, -0.78);
+    g.add(door);
+
+    // knob emas
+    const knob = new THREE.Mesh(
+      new THREE.SphereGeometry(0.15, 12, 12),
+      new THREE.MeshLambertMaterial({ color:0xfbbf24, emissive:0xf59e0b, emissiveIntensity:0.4 })
+    );
+    knob.position.set(i*3.1, 1.7, -0.9);
+    g.add(knob);
+  }
+
+  // topi atas
+  const top = new THREE.Mesh(
+    new THREE.BoxGeometry(16.4, 0.3, 1.7),
+    new THREE.MeshLambertMaterial({ color:0xbfe8ff })
+  );
+  top.position.set(0, 3.55, 0);
+  g.add(top);
+
+  g.position.set(0, 0, ROOM_HALF - 0.85);
+  scene.add(g);
+}
+
+/* ---------- KARAKTER DETEKTIF ---------- */
+function buildPlayer(){
+  player = new THREE.Group();
+
+  const skin = 0xfbd7b8;
+  const hairColor = state.avatar === 'putri' ? 0x5b3a29 : 0x2f2438;
+
+  // Kaki
+  const legMat = new THREE.MeshLambertMaterial({ color:0x4b5563 });
+  const legL = new THREE.Mesh(new THREE.CylinderGeometry(0.17,0.17,0.9,10), legMat);
+  legL.position.set(-0.24, 0.45, 0);
+  player.add(legL);
+  const legR = legL.clone();
+  legR.position.x = 0.24;
+  player.add(legR);
+
+  // Badan (jas lab putih)
+  const body = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.55, 0.62, 1.45, 16),
+    new THREE.MeshLambertMaterial({ color:0xffffff })
+  );
+  body.position.y = 1.62;
+  player.add(body);
+
+  // Kemeja pink (dada)
+  const shirt = new THREE.Mesh(
+    new THREE.BoxGeometry(0.5, 1.0, 0.12),
+    new THREE.MeshLambertMaterial({ color:0xff9ecd })
+  );
+  shirt.position.set(0, 1.62, 0.5);
+  player.add(shirt);
+
+  // Kerah jas
+  const collarL = new THREE.Mesh(
+    new THREE.BoxGeometry(0.22, 0.55, 0.14),
+    new THREE.MeshLambertMaterial({ color:0xeef2ff })
+  );
+  collarL.position.set(-0.26, 2.15, 0.48);
+  collarL.rotation.z = 0.25;
+  player.add(collarL);
+  const collarR = collarL.clone();
+  collarR.position.x = 0.26;
+  collarR.rotation.z = -0.25;
+  player.add(collarR);
+
+  // Lengan
+  const armMat = new THREE.MeshLambertMaterial({ color:0xffffff });
+  const armL = new THREE.Mesh(new THREE.CylinderGeometry(0.14,0.14,1.15,10), armMat);
+  armL.position.set(-0.72, 1.65, 0);
+  armL.rotation.z = 0.16;
+  player.add(armL);
+  const armR = armL.clone();
+  armR.position.x = 0.72;
+  armR.rotation.z = -0.16;
+  player.add(armR);
+
+  // Tangan
+  const handMat = new THREE.MeshLambertMaterial({ color:skin });
+  const handL = new THREE.Mesh(new THREE.SphereGeometry(0.15,10,10), handMat);
+  handL.position.set(-0.82, 1.08, 0);
+  player.add(handL);
+  const handR = handL.clone();
+  handR.position.x = 0.82;
+  player.add(handR);
+
+  // Leher
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.16,0.16,0.2,10), handMat);
+  neck.position.y = 2.42;
+  player.add(neck);
+
+  // Kepala
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.42, 20, 20), handMat);
+  head.position.y = 2.85;
+  player.add(head);
+
+  // Rambut
+  const hairMat = new THREE.MeshLambertMaterial({ color: hairColor });
+  if(state.avatar === 'putri'){
+    const hairBack = new THREE.Mesh(new THREE.SphereGeometry(0.46, 20, 20), hairMat);
+    hairBack.position.set(0, 2.85, -0.06);
+    hairBack.scale.set(1, 1.05, 1.05);
+    player.add(hairBack);
+
+    const hairLong = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.44, 0.34, 1.3, 16),
+      hairMat
+    );
+    hairLong.position.set(0, 2.2, -0.16);
+    player.add(hairLong);
+  } else {
+    const hairTop = new THREE.Mesh(new THREE.SphereGeometry(0.44, 20, 20, 0, Math.PI*2, 0, Math.PI*0.62), hairMat);
+    hairTop.position.set(0, 2.87, -0.03);
+    player.add(hairTop);
+  }
+
+  // Mata
+  const eyeMat = new THREE.MeshBasicMaterial({ color:0x2f2438 });
+  const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.055, 10, 10), eyeMat);
+  eyeL.position.set(-0.15, 2.9, 0.38);
+  player.add(eyeL);
+  const eyeR = eyeL.clone();
+  eyeR.position.x = 0.15;
+  player.add(eyeR);
+
+  // Senyum
+  const smile = new THREE.Mesh(
+    new THREE.TorusGeometry(0.11, 0.022, 8, 16, Math.PI),
+    new THREE.MeshBasicMaterial({ color:0xb5654a })
+  );
+  smile.position.set(0, 2.72, 0.39);
+  smile.rotation.z = Math.PI;
+  player.add(smile);
+
+  player.position.set(0, 0, 0);
+  scene.add(player);
+}
+
+/* ---------- GELAS KIMIA ---------- */
+function makeLabelSprite(text, sub){
+  const c = document.createElement('canvas');
+  c.width = 512; c.height = 220;
+  const x = c.getContext('2d');
+
+  x.fillStyle = 'rgba(255,255,255,0.94)';
+  const r = 34;
+  x.beginPath();
+  x.moveTo(r,0); x.lineTo(512-r,0); x.quadraticCurveTo(512,0,512,r);
+  x.lineTo(512,220-r); x.quadraticCurveTo(512,220,512-r,220);
+  x.lineTo(r,220); x.quadraticCurveTo(0,220,0,220-r);
+  x.lineTo(0,r); x.quadraticCurveTo(0,0,r,0); x.closePath(); x.fill();
+
+  x.strokeStyle = '#f472b6'; x.lineWidth = 10; x.stroke();
+
+  x.fillStyle = '#3a2d55';
+  x.font = '800 66px "Baloo 2", sans-serif';
+  x.textAlign = 'center';
+  x.textBaseline = 'middle';
+  x.fillText(text, 256, sub ? 84 : 110);
+
+  if(sub){
+    x.fillStyle = '#8b7fa8';
+    x.font = '700 34px Nunito, sans-serif';
+    x.fillText(sub, 256, 152);
+  }
+
+  const tex = new THREE.CanvasTexture(c);
+  tex.anisotropy = 4;
+  const mat = new THREE.SpriteMaterial({ map: tex, transparent:true, depthTest:false });
+  const sprite = new THREE.Sprite(mat);
+  sprite.scale.set(2.6, 1.12, 1);
+  return sprite;
+}
+
+function buildBeakers(){
+  BEAKERS.forEach((data, i)=>{
+    const group = new THREE.Group();
+    const ang = (i / BEAKERS.length) * Math.PI * 2;
+    const px = Math.cos(ang) * BEAKER_R;
+    const pz = Math.sin(ang) * BEAKER_R;
+    group.position.set(px, 0, pz);
+
+    // Meja lab
+    const tableTop = new THREE.Mesh(
+      new THREE.BoxGeometry(2.6, 0.22, 2.0),
+      new THREE.MeshLambertMaterial({ color:0xfff4d6 })
+    );
+    tableTop.position.y = 0.88;
+    group.add(tableTop);
+
+    const tableBody = new THREE.Mesh(
+      new THREE.BoxGeometry(2.3, 0.8, 1.75),
+      new THREE.MeshLambertMaterial({ color:0xe9f6ff })
+    );
+    tableBody.position.y = 0.44;
+    group.add(tableBody);
+
+    // Alas
+    const base = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.62, 0.7, 0.14, 20),
+      new THREE.MeshLambertMaterial({ color:0xdbeafe })
+    );
+    base.position.y = 1.06;
+    group.add(base);
+
+    // Gelas kimia transparan (open ended)
+    const glass = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.5, 0.5, 1.1, 24, 1, true),
+      new THREE.MeshLambertMaterial({
+        color:0xdff6ff, transparent:true, opacity:0.34, side:THREE.DoubleSide
+      })
+    );
+    glass.position.y = 1.68;
+    group.add(glass);
+
+    // Bibir gelas
+    const rim = new THREE.Mesh(
+      new THREE.TorusGeometry(0.5, 0.045, 8, 24),
+      new THREE.MeshLambertMaterial({ color:0xffffff, transparent:true, opacity:0.75 })
+    );
+    rim.rotation.x = Math.PI/2;
+    rim.position.y = 2.23;
+    group.add(rim);
+
+    // Dasar gelas
+    const glassBottom = new THREE.Mesh(
+      new THREE.CircleGeometry(0.5, 24),
+      new THREE.MeshLambertMaterial({ color:0xdff6ff, transparent:true, opacity:0.4, side:THREE.DoubleSide })
+    );
+    glassBottom.rotation.x = -Math.PI/2;
+    glassBottom.position.y = 1.14;
+    group.add(glassBottom);
+
+    // Cairan berwarna
+    const liquid = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.46, 0.46, 0.72, 24),
+      new THREE.MeshLambertMaterial({
+        color: data.warna, transparent:true, opacity:0.82,
+        emissive: data.warna, emissiveIntensity:0.14
+      })
+    );
+    liquid.position.y = 1.53;
+    group.add(liquid);
+
+    // Tiang lampu
+    const pole = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.07, 0.09, 1.75, 12),
+      new THREE.MeshLambertMaterial({ color:0x94a3b8 })
+    );
+    pole.position.y = 1.98;
+    group.add(pole);
+
+    // Dudukan bohlam
+    const socket = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.16, 0.16, 0.2, 12),
+      new THREE.MeshLambertMaterial({ color:0x64748b })
+    );
+    socket.position.y = 2.88;
+    group.add(socket);
+
+    // Bohlam
+    const bulbMat = new THREE.MeshLambertMaterial({
+      color:0xd6dde8, emissive:0x000000, emissiveIntensity:0, transparent:true, opacity:0.9
+    });
+    const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.26, 18, 18), bulbMat);
+    bulb.position.y = 3.16;
+    group.add(bulb);
+
+    // Cahaya bohlam (mulai mati)
+    const bulbLight = new THREE.PointLight(0xffe066, 0, 9);
+    bulbLight.position.y = 3.16;
+    group.add(bulbLight);
+
+    // Label sprite
+    const label = makeLabelSprite(data.rumus, data.nama);
+    label.position.set(0, 4.1, 0);
+    group.add(label);
+
+    // Cincin penanda pink di lantai
+    const pinkRing = new THREE.Mesh(
+      new THREE.RingGeometry(1.35, 1.55, 48),
+      new THREE.MeshBasicMaterial({ color:0xf472b6, transparent:true, opacity:0.5, side:THREE.DoubleSide })
+    );
+    pinkRing.rotation.x = -Math.PI/2;
+    pinkRing.position.y = 0.02;
+    group.add(pinkRing);
+
+    // Gelembung (pool 24, tersembunyi)
+    const bubbles = [];
+    for(let b=0; b<24; b++){
+      const bub = new THREE.Mesh(
+        new THREE.SphereGeometry(0.045 + Math.random()*0.035, 8, 8),
+        new THREE.MeshBasicMaterial({ color:0xffffff, transparent:true, opacity:0.85 })
+      );
+      bub.visible = false;
+      bub.userData.baseY = 1.18;
+      bub.userData.topY = 1.88;
+      bub.userData.vy = 0.5 + Math.random()*0.9;
+      bub.position.set(
+        (Math.random()-0.5)*0.66,
+        1.18 + Math.random()*0.6,
+        (Math.random()-0.5)*0.66
+      );
+      group.add(bub);
+      bubbles.push(bub);
+    }
+
+    // Hitbox untuk raycast tap
+    const hit = new THREE.Mesh(
+      new THREE.CylinderGeometry(1.3, 1.3, 4.4, 10),
+      new THREE.MeshBasicMaterial({ visible:false })
+    );
+    hit.position.y = 2.2;
+    hit.userData.beakerIndex = i;
+    group.add(hit);
+    hitboxes.push(hit);
+
+    scene.add(group);
+
+    beakerObjects.push({
+      index: i,
+      data: data,
+      group: group,
+      bulb: bulb,
+      bulbLight: bulbLight,
+      liquid: liquid,
+      bubbles: bubbles,
+      label: label,
+      pinkRing: pinkRing,
+      tested: false,
+      testing: false,
+      testT: 0,
+      glow: 0
+    });
+  });
+}
+
+/* ---------- KONTROL PEMAIN ---------- */
+function setupControls(){
+  // Keyboard
+  window.addEventListener('keydown', e=>{
+    const k = e.key.toLowerCase();
+    keysPressed[k] = true;
+    if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k)) e.preventDefault();
+  });
+  window.addEventListener('keyup', e=>{
+    keysPressed[e.key.toLowerCase()] = false;
+  });
+
+  // Joystick
+  const joy = document.getElementById('joystick');
+  const knob = document.getElementById('joyKnob');
+  let joyActive = false;
+  let joyId = null;
+  let center = { x:0, y:0 };
+  const maxDist = 34;
+
+  function joyStart(e){
+    e.preventDefault();
+    joyActive = true;
+    const rect = joy.getBoundingClientRect();
+    center = { x: rect.left + rect.width/2, y: rect.top + rect.height/2 };
+    const t = e.changedTouches ? e.changedTouches[0] : e;
+    joyId = t.identifier !== undefined ? t.identifier : 'mouse';
+    joyMove(e);
+  }
+
+  function joyMove(e){
+    if(!joyActive) return;
+    e.preventDefault();
+    let t = null;
+    if(e.changedTouches){
+      for(let i=0;i<e.changedTouches.length;i++){
+        if(e.changedTouches[i].identifier === joyId){ t = e.changedTouches[i]; break; }
+      }
+      if(!t) return;
+    } else {
+      t = e;
+    }
+    let dx = t.clientX - center.x;
+    let dy = t.clientY - center.y;
+    const dist = Math.hypot(dx, dy);
+    if(dist > maxDist){
+      dx = dx / dist * maxDist;
+      dy = dy / dist * maxDist;
+    }
+    knob.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+    joystickInput.x = dx / maxDist;
+    joystickInput.y = dy / maxDist;
+    joystickInput.active = Math.hypot(dx,dy) > 5;
+    if(joystickInput.active) walkTarget = null;
+  }
+
+  function joyEnd(e){
+    if(!joyActive) return;
+    if(e.changedTouches){
+      let found = false;
+      for(let i=0;i<e.changedTouches.length;i++){
+        if(e.changedTouches[i].identifier === joyId){ found = true; break; }
+      }
+      if(!found) return;
+    }
+    joyActive = false;
+    knob.style.transform = 'translate(-50%, -50%)';
+    joystickInput.x = 0;
+    joystickInput.y = 0;
+    joystickInput.active = false;
+  }
+
+  joy.addEventListener('touchstart', joyStart, { passive:false });
+  joy.addEventListener('touchmove', joyMove, { passive:false });
+  joy.addEventListener('touchend', joyEnd);
+  joy.addEventListener('touchcancel', joyEnd);
+  joy.addEventListener('mousedown', joyStart);
+  window.addEventListener('mousemove', joyMove);
+  window.addEventListener('mouseup', joyEnd);
+
+  // Tap gelas → jalan otomatis
+  const canvas = document.getElementById('labCanvas');
+  let downPos = null;
+
+  canvas.addEventListener('pointerdown', e=>{
+    downPos = { x:e.clientX, y:e.clientY, t:Date.now() };
+  });
+
+  canvas.addEventListener('pointerup', e=>{
+    if(!downPos) return;
+    const moved = Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y);
+    const dt = Date.now() - downPos.t;
+    downPos = null;
+    if(moved > 12 || dt > 500) return; // dianggap drag, bukan tap
+    handleCanvasTap(e.clientX, e.clientY);
+  });
+}
+
+function handleCanvasTap(clientX, clientY){
+  if(!labReady || labLocked) return;
+  const canvas = document.getElementById('labCanvas');
+  const rect = canvas.getBoundingClientRect();
+  const ndc = new THREE.Vector2(
+    ((clientX - rect.left) / rect.width) * 2 - 1,
+    -((clientY - rect.top) / rect.height) * 2 + 1
+  );
+  const ray = new THREE.Raycaster();
+  ray.setFromCamera(ndc, camera);
+
+  const hits = ray.intersectObjects(hitboxes, false);
+  if(hits.length > 0){
+    const idx = hits[0].object.userData.beakerIndex;
+    const b = beakerObjects[idx];
+    if(b){
+      const dir = new THREE.Vector3()
+        .subVectors(player.position, b.group.position).setY(0).normalize();
+      const stopPos = b.group.position.clone()
+        .add(dir.multiplyScalar(2.5)).setY(0);
+      walkTarget = stopPos;
+      Sound.click();
+      showToast('Menuju ' + b.data.rumus + ' 🚶');
+    }
+  }
+}
+
+/* ---------- UPDATE PEMAIN ---------- */
+function updatePlayer(dt){
+  if(!player || labLocked) return;
+
+  let mx = 0, mz = 0;
+
+  // Keyboard
+  if(keysPressed['w'] || keysPressed['arrowup'])    mz -= 1;
+  if(keysPressed['s'] || keysPressed['arrowdown'])  mz += 1;
+  if(keysPressed['a'] || keysPressed['arrowleft'])  mx -= 1;
+  if(keysPressed['d'] || keysPressed['arrowright']) mx += 1;
+
+  // Joystick
+  if(joystickInput.active){
+    mx += joystickInput.x;
+    mz += joystickInput.y;
+  }
+
+  const mag = Math.hypot(mx, mz);
+  if(mag > 0.08){
+    walkTarget = null;
+    const nx = mx / (mag || 1);
+    const nz = mz / (mag || 1);
+    const speed = PLAYER_SPEED * Math.min(1, mag);
+    player.position.x += nx * speed * dt;
+    player.position.z += nz * speed * dt;
+    // Hadapkan ke arah gerak
+    const targetAngle = Math.atan2(nx, nz);
+    player.rotation.y = lerpAngle(player.rotation.y, targetAngle, 0.2);
+    // Bob
+    player.children.forEach((c,i)=>{ if(i===0||i===1) c.position.y = 0.45 + Math.abs(Math.sin(performance.now()*0.012))*0.07; });
+  } else if(walkTarget){
+    const dx = walkTarget.x - player.position.x;
+    const dz = walkTarget.z - player.position.z;
+    const d = Math.hypot(dx, dz);
+    if(d < 0.25){
+      walkTarget = null;
+    } else {
+      const nx = dx / d, nz = dz / d;
+      const step = Math.min(PLAYER_SPEED * dt, d);
+      player.position.x += nx * step;
+      player.position.z += nz * step;
+      player.rotation.y = lerpAngle(player.rotation.y, Math.atan2(nx, nz), 0.24);
+      player.children.forEach((c,i)=>{ if(i===0||i===1) c.position.y = 0.45 + Math.abs(Math.sin(performance.now()*0.012))*0.07; });
+    }
+  }
+
+  // Batas ruangan
+  const lim = ROOM_HALF - 1.6;
+  player.position.x = Math.max(-lim, Math.min(lim, player.position.x));
+  player.position.z = Math.max(-lim, Math.min(lim, player.position.z));
+}
+
+function lerpAngle(a, b, t){
+  let diff = b - a;
+  while(diff > Math.PI) diff -= Math.PI*2;
+  while(diff < -Math.PI) diff += Math.PI*2;
+  return a + diff * t
